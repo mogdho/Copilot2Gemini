@@ -45,7 +45,7 @@ Paste your specific profile directory and app-id here.
 ```autohotkey
 args := '--profile-directory="Default" --app-id=YOUR_APP_ID_HERE'
 ```
-###Step 4: Pin to Taskbar
+#### Step 4: Pin to Taskbar
 Pin the Gemini PWA to your Windows Taskbar. Count its position from left to right (excluding the Start Button and Widgets).
 
 By default, the script assumes it is the 4th pinned app (Send("#4")).
