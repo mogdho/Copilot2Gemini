@@ -52,9 +52,13 @@ By default, the script assumes it is the 4th pinned app (Send("#4")).
 
 If you pin it in the 2nd position, open the script and change Send("#4") to Send("#2").
 
-🚀 Installation & Usage
-Verify that AutoHotkey v2.0+ is installed.
+### 🚀 Installation & Usage
+1. Verify that [AutoHotkey v2.0+](https://www.autohotkey.com/) is installed on your operating system.
+2. Download the script file from this repository.
+3. Execute the file to initialize the background process.
 
-Double-click Copilot2Gemini.ahk to run it.
+> **Note:** To automate execution upon system boot, press `Win + R`, type `shell:startup` and paste the script file there. Ensure it has Administrator privileges to function correctly.
 
-Automate on Boot: Press Win + R, type shell:startup, and paste the script (or its shortcut) there. Ensure it runs with Administrator privileges.
+---
+### 🔗 Download/Source link
+- Download/Source link - https://github.com/mogdho/AlwaysNumLock/
