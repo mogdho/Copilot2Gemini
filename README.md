@@ -61,4 +61,4 @@ If you pin it in the 2nd position, open the script and change Send("#4") to Send
 
 ---
 ### 🔗 Download/Source link
-- Download/Source link - https://github.com/mogdho/AlwaysNumLock/
+- Download/Source link - https://github.com/mogdho/Copilot2Gemini
