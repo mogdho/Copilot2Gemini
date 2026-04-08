@@ -10,6 +10,7 @@
 * **Force New Instance:** Use `Ctrl + Copilot` to bypass the toggle logic and force a fresh, new window of Gemini.
 * **Auto-Admin Elevation:** Self-elevates to Administrator to ensure shortcut interception works system-wide.
 * **Universal Browser Support:** Works with Chrome, Brave, or Edge (requires minor configuration).
+* **Ghost Start Menu Fix:** Utilizes physical key release detection (KeyWait) and system masking (vkE8) to guarantee the Windows Start Menu never accidentally triggers after pressing the Copilot button.
 
 ---
 
@@ -50,7 +51,7 @@ Pin the Gemini PWA to your Windows Taskbar. Count its position from left to righ
 
 By default, the script assumes it is the 4th pinned app (Send("#4")).
 
-If you pin it in the 2nd position, open the script and change Send("#4") to Send("#2").
+If you pin it in a different position (e.g., 2nd), open the script in a text editor and update the taskbarPosition variable in the Configuration Section (e.g., taskbarPosition := "#2").
 
 ### 🚀 Installation & Usage
 1. Verify that [AutoHotkey v2.0+](https://www.autohotkey.com/) is installed on your operating system.
@@ -59,6 +60,7 @@ If you pin it in the 2nd position, open the script and change Send("#4") to Send
 
 > **Note:** To automate execution upon system boot, press `Win + R`, type `shell:startup` and paste the script file there. Ensure it has Administrator privileges to function correctly.
 
+Pro Tip: For a silent, automatic background startup, schedule the script via Windows Task Scheduler and ensure you check the "Run with highest privileges" option.
 ---
 ### 🔗 Download/Source link
 - Download/Source link - https://github.com/mogdho/Copilot2Gemini
