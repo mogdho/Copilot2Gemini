@@ -1,55 +1,67 @@
 #Requires AutoHotkey v2.0
+#UseHook ; Forces the use of the keyboard hook to override default Windows shortcuts
 
-; =====================================================================
-; ⚙️ USER CONFIGURATION SECTION - PLEASE UPDATE THESE VARIABLES
-; =====================================================================
+; ==============================================================================
+; 🔵 CONFIGURATION SECTION: Modify these values according to your setup
+; ==============================================================================
 
-; 1. BROWSER PATH: Replace with your browser's proxy or executable path.
-; Example: '"C:\Program Files\Google\Chrome\Application\chrome_proxy.exe"'
-targetPath := '"YOUR_BROWSER_PATH_HERE"'
+; 1. BROWSER PATH: Provide the exact path to your browser's executable (e.g., chrome_proxy.exe for Brave/Chrome PWAs)
+targetPath := '"C:\Program Files\BraveSoftware\Brave-Browser\Application\chrome_proxy.exe"'
 
-; 2. APP ARGUMENTS: Replace Profile Name and App ID.
-; Example: '--profile-directory="Default" --app-id=gdfaincndogidkdcdkhapmbffkckdkhn'
-args := '--profile-directory="YOUR_PROFILE_HERE" --app-id=YOUR_APP_ID_HERE'
+; 2. APP ARGUMENTS: Add your profile directory and the specific App ID for the Gemini PWA
+; You can find the App ID in the properties of your PWA desktop shortcut.
+args := '--profile-directory="Profile 4" --app-id=gdfaincndogidkdcdkhapmbffkckdkhn'
 
-; 3. WINDOW EXECUTABLE: Change 'brave.exe' to 'chrome.exe' or 'msedge.exe' if needed.
-; Example: "Gemini ahk_exe chrome.exe"
-winTitle := "Gemini ahk_exe YOUR_BROWSER_EXE_HERE"
+; 3. WINDOW TITLE: The exact title or ahk_exe used to identify the PWA window
+; Example: "Gemini ahk_exe brave.exe" or "Gemini ahk_exe chrome.exe"
+winTitle := "Gemini ahk_exe brave.exe"
 
-; 4. EXCLUDE TITLE: Prevents matching regular browser windows.
-; Example: "- Google Chrome" or "- Brave"
-excludeTitle := "- YOUR_BROWSER_NAME_HERE"
+; 4. EXCLUDE TITLE: Prevents the script from triggering on regular browser tabs
+excludeTitle := "- Brave"
 
-; 5. TASKBAR POSITION: Change the number '4' to wherever your PWA is pinned.
-; Example: If it's the 2nd icon on your taskbar, change "#4" to "#2".
+; 5. TASKBAR POSITION: The position of your pinned Gemini PWA on the taskbar.
+; For example, if it's the 4th icon, use "#4". This uses the native Win + Number toggle logic.
 taskbarPosition := "#4"
 
-; =====================================================================
-; 🛑 END OF CONFIGURATION - DO NOT MODIFY BELOW UNLESS YOU KNOW AHK
-; =====================================================================
+; ==============================================================================
+; 🛑 END OF CONFIGURATION - Do not modify below unless you know what you are doing
+; ==============================================================================
 
+; Request Administrator privileges automatically (Required to prevent conflicts with elevated windows)
 if !A_IsAdmin {
-    Run('*RunAs "' A_ScriptFullPath '"')
+    try {
+        Run('*RunAs "' A_ScriptFullPath '"')
+    } catch {
+        MsgBox "Admin permissions are required for full functionality. The script will now exit.", "Permission Error", 16
+    }
     ExitApp()
 }
 
+; Set matching behavior: 1 = Window title must start with the specified string
 SetTitleMatchMode(1) 
-
 fullCommand := targetPath . " " . args
 
-<+#f23::
-#c::
+; ------------------------------------------------------------------------------
+; HOTKEY 1: Single Press Copilot Button (Toggle Logic: Open/Minimize/Restore)
+; The '$' prefix prevents the default Windows Search/Copilot overlay from appearing
+; ------------------------------------------------------------------------------
+$#c::
+$<+#f23::
 {
     if WinExist(winTitle, , excludeTitle) {
-        Send(taskbarPosition) 
+        ; If the window exists, use the native Windows taskbar shortcut to toggle focus/minimize
+        Send(taskbarPosition)
     } else {
+        ; If the window does not exist, launch the PWA
         Run(fullCommand)
     }
 }
 
-
-^<+#f23::
-^#c::
+; ------------------------------------------------------------------------------
+; HOTKEY 2: Ctrl + Copilot Button (Always open a fresh new window)
+; ------------------------------------------------------------------------------
+$^#c::
+$^<+#f23::
 {
     Run(fullCommand)
 }
