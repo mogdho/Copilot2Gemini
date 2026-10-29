@@ -3,64 +3,130 @@
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/Platform-Windows-blue?style=for-the-badge&logo=windows)
 
-**Copilot2Gemini** is an advanced AutoHotkey v2 script that remaps the physical Windows Copilot key (or `Win + C`) to launch the Google Gemini Progressive Web App (PWA). It utilizes a clever taskbar-pinning logic to flawlessly handle minimizing and restoring the PWA window, avoiding the common focus issues associated with web apps.
+**Make your keyboard's Copilot key open Google Gemini instead** (or ChatGPT, Claude, or any other web app). One key to open, hide and bring back your assistant, just like a real built-in one.
 
-### ✨ Key Features
-* **Smart Toggle:** Replaces Copilot with Gemini PWA. Pressing the button will open the app, minimize it if it's currently focused, or restore it if it's minimized.
-* **Force New Instance:** Use `Ctrl + Copilot` to bypass the toggle logic and force a fresh, new window of Gemini.
-* **Auto-Admin Elevation:** Self-elevates to Administrator to ensure shortcut interception works system-wide.
-* **Universal Browser Support:** Works with Chrome, Brave, or Edge (requires minor configuration).
-* **Ghost Start Menu Fix:** Utilizes physical key release detection (KeyWait) and system masking (vkE8) to guarantee the Windows Start Menu never accidentally triggers after pressing the Copilot button.
+<p align="center">
+  <img src="assets/demo.svg" width="100%" alt="Animation: press the Copilot key to open Gemini, press again to hide it, press again to bring it back">
+</p>
 
 ---
 
-### ⚙️ Step-by-Step Setup Guide
+## ⌨️ Controls
 
-Since system configurations and browser profiles vary, you must install the PWA and configure the script manually before running it.
+| You press | Your assistant is… | What happens |
+|:--|:--|:--|
+| `Copilot key` or `Win + C` | closed | 🟢 Opens it |
+| `Copilot key` or `Win + C` | in front | ➖ Hides it (minimizes) |
+| `Copilot key` or `Win + C` | behind other windows / minimized | ⬆️ Brings it to the front |
+| `Ctrl` + `Copilot key` | anything | ➕ Opens an extra window |
 
-#### Step 1: Install the Gemini PWA
-1. Open your Chromium-based browser (Chrome, Brave, Edge) and go to [gemini.google.com](https://gemini.google.com).
-2. Click the browser's **3-dot menu** (top right).
-3. Go to **Save and share** (or Apps) > **Install page as app...**
-4. Name it "Gemini" and click **Install**.
+✨ **Also:** the Start menu never pops up by accident, and the browser is started **without** admin rights (safer).
 
-#### Step 2: Find Your Target Path & App ID
-1. Open your browser and type `chrome://apps` (or `brave://apps`) in the address bar.
-2. Right-click on the newly installed **Gemini** app and select **Create shortcuts** (check only the Desktop option).
-3. Go to your Windows Desktop, right-click the **Gemini** shortcut, and select **Properties**.
-4. Look at the **Target** field. It will look something like this:
-`"C:\Program Files\Google\Chrome\Application\chrome_proxy.exe" --profile-directory="Default" --app-id=gdfaincndogidkdcdkhapmbffkckdkhn`
-
-#### Step 3: Configure the Script
-Open `Copilot2Gemini.ahk` in a text editor. You need to update two lines of code using the information from Step 2.
-
-**Target Path:**
-Replace the path with your browser's executable path (keep the single and double quotes exactly as shown).
-
-```autohotkey
-targetPath := '"C:\Program Files\Google\Chrome\Application\chrome_proxy.exe"'
-```
-Arguments (Profile & App ID):
-Paste your specific profile directory and app-id here.
-
-```autohotkey
-args := '--profile-directory="Default" --app-id=YOUR_APP_ID_HERE'
-```
-#### Step 4: Pin to Taskbar
-Pin the Gemini PWA to your Windows Taskbar. Count its position from left to right (excluding the Start Button and Widgets).
-
-By default, the script assumes it is the 4th pinned app (Send("#4")).
-
-If you pin it in a different position (e.g., 2nd), open the script in a text editor and update the taskbarPosition variable in the Configuration Section (e.g., taskbarPosition := "#2").
-
-### 🚀 Installation & Usage
-1. Verify that [AutoHotkey v2.0+](https://www.autohotkey.com/) is installed on your operating system.
-2. Download the script file from this repository.
-3. Execute the file to initialize the background process.
-
-> **Note:** To automate execution upon system boot, press `Win + R`, type `shell:startup` and paste the script file there. Ensure it has Administrator privileges to function correctly.
-
-Pro Tip: For a silent, automatic background startup, schedule the script via Windows Task Scheduler and ensure you check the "Run with highest privileges" option.
 ---
-### 🔗 Download/Source link
-- Download/Source link - https://github.com/mogdho/Copilot2Gemini
+
+## 🚀 Get started
+
+### Step 1 — Install Gemini as an app *(skip if you already did)*
+
+Works with **Chrome, Brave or Edge**.
+
+1. Open [gemini.google.com](https://gemini.google.com).
+2. Click the **⋮ menu** (top right) → **Save and share** (or **Apps**) → **Install page as app…**
+3. Click **Install**. Gemini now opens in its own window.
+
+### Step 2 — Run Copilot2Gemini
+
+**⚡ Easiest: download the .exe (no AutoHotkey needed)**
+
+1. Go to **[Releases](https://github.com/mogdho/Copilot2Gemini/releases/latest)** and download **`Copilot2Gemini.exe`**.
+2. **Double-click** it and click **Yes** on the admin pop-up.
+3. A notification says **"Found Google Gemini"**. Press the **Copilot key**. 🎉
+
+> 🛡️ **"Windows protected your PC"?** The .exe isn't code-signed (that costs money), so Windows SmartScreen may warn you. Click **More info** → **Run anyway**. Don't trust it? Use the script version below and read the code yourself.
+
+**🛠️ Or run the script with AutoHotkey**
+
+1. Install **[AutoHotkey v2](https://www.autohotkey.com/)** (free).
+2. **Download** this repository: green **Code** button → **Download ZIP**, then unzip it.
+3. **Double-click** `Copilot2Gemini.ahk` and click **Yes** on the admin pop-up.
+4. A notification says **"Found Google Gemini"**. Press the **Copilot key**. 🎉
+
+**There's nothing to configure.** The script finds the apps you installed in Step 1 by itself: browser, profile and app ID included.
+
+> **No Gemini app installed?** The Copilot key still works: it opens gemini.google.com in your normal browser.
+>
+> **Why admin?** Without it, Windows ignores the key while an admin app (Task Manager, installers…) is in front. Your browser still starts as a normal app.
+
+---
+
+## 🗂️ Tray menu: pick your assistant
+
+Right-click the tray icon:
+
+<p align="center">
+  <img src="assets/tray.svg" width="90%" alt="Tray menu with an Assistant submenu listing installed web apps such as Google Gemini, ChatGPT and Claude">
+</p>
+
+| Option | What it does |
+|:--|:--|
+| **Assistant ›** | Lists every web app installed from Chrome, Brave or Edge. Click one to put it on the Copilot key. Your choice is remembered. |
+| **Assistant › Rescan installed apps** | Use this after installing a new app (e.g. ChatGPT or Claude). |
+| **Pause** | The Copilot key goes back to normal until you resume. The icon fades. *Tip: double-click the tray icon to pause / resume.* |
+| **Start with Windows** | Starts the script automatically when you log in, **with no admin pop-up**. Click again to turn it off. |
+| **Exit** | Closes the script. |
+
+### ➕ Use ChatGPT, Claude or anything else
+
+1. Open the site (e.g. [chatgpt.com](https://chatgpt.com) or [claude.ai](https://claude.ai)) and **install it as an app**, same as Step 1.
+2. Right-click the tray icon → **Assistant** → **Rescan installed apps**.
+3. Pick it from the **Assistant** list. Done!
+
+---
+
+## 🧠 How it works
+
+```mermaid
+flowchart TD
+    S([▶️ Script starts]) --> F[🔍 Scan Start menu, Desktop and browser profiles<br/>for installed web apps]
+    F --> P[Pick your saved assistant,<br/>or Gemini on first run]
+    A([⌨️ Copilot key / Win + C]) --> B{Assistant window in front?}
+    B -- Yes --> C[➖ Minimize it]
+    B -- No --> D{Open somewhere?}
+    D -- Yes --> E[⬆️ Bring it to the front]
+    D -- No --> G[🟢 Launch it<br/>as a normal, non-admin app]
+```
+
+- **Finding apps:** installed web apps have shortcuts that start the browser with `--app-id=…`. The script reads those shortcuts.
+- **Finding the window:** every web-app window carries a hidden Windows ID made from its app ID, so the script finds the right window even when its title changes (ChatGPT, for example, shows the chat name).
+- **Copilot key:** it secretly sends `Win + Shift + F23`, so the script listens for that (plus `Win + C`).
+- Your choice is saved in `Copilot2Gemini.ini` next to the script.
+
+---
+
+## ❓ Troubleshooting
+
+| Problem | Fix |
+|:--|:--|
+| It opens Gemini in a **browser tab** | No Gemini app was found. Do **Step 1**, then tray → **Assistant** → **Rescan installed apps**. |
+| My new app isn't in the **Assistant** list | Tray → **Assistant** → **Rescan installed apps**. |
+| Wrong Google account | If you installed the app in several browser profiles, each one is listed with its profile name. Pick the right one. |
+| Copilot key does nothing | Check the tray icon is there and not faded (paused). Make sure you installed AutoHotkey **v2**. |
+| Windows Copilot still opens | Run the script as admin: click **Yes** on the pop-up, or tick **Start with Windows**. |
+
+---
+
+## 🗑️ Uninstall
+
+1. Right-click the tray icon → **untick Start with Windows** *(removes its startup task)*.
+2. Right-click the tray icon → **Exit**.
+3. Delete `Copilot2Gemini.exe` / `.ahk` and `Copilot2Gemini.ini` next to it.
+
+> ⚠️ **Already deleted it?** The startup task is left behind. Press `Win + R` → `taskschd.msc` → right-click **Copilot2Gemini (AutoHotkey)** → **Delete**.
+
+---
+
+### 🔗 Download / Source
+- 📂 **Repository:** [github.com/mogdho/Copilot2Gemini](https://github.com/mogdho/Copilot2Gemini)
+
+### 👨‍💻 Author
+**Mogdho Paul** · [github.com/mogdho](https://github.com/mogdho)

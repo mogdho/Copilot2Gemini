@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 270" width="640" height="270" role="img" aria-label="Tray menu with an Assistant submenu listing installed web apps such as Google Gemini (checked), ChatGPT and Claude, plus Rescan installed apps">
+  <style>
+    .ui { font-family: "Segoe UI", system-ui, -apple-system, sans-serif; }
+    .hl { animation: hl 7s infinite ease-in-out; }
+    @keyframes hl { 0%,14% {transform: translateY(0)} 22%,44% {transform: translateY(36px)} 52%,74% {transform: translateY(72px)} 82%,100% {transform: translateY(0)} }
+    .chk { animation: chk 7s infinite ease-in-out; }
+    @keyframes chk { 0%,18% {transform: translateY(0)} 22%,48% {transform: translateY(36px)} 52%,78% {transform: translateY(72px)} 82%,100% {transform: translateY(0)} }
+    @media (prefers-reduced-motion: reduce) { .hl, .chk { animation: none; } }
+  </style>
+  <rect width="640" height="270" rx="16" fill="#0f172a"/>
+
+  <!-- Main menu -->
+  <rect x="24" y="20" width="250" height="206" rx="10" fill="#2b2b2b" stroke="#3f3f3f"/>
+  <text x="44" y="50" class="ui" font-size="14" fill="#8a8a8a">Copilot2Gemini</text>
+  <rect x="32" y="62" width="234" height="1" fill="#454545"/>
+  <rect x="30" y="70" width="238" height="32" rx="6" fill="#3d3d3d"/>
+  <text x="68" y="91" class="ui" font-size="14" fill="#f3f3f3">Assistant</text>
+  <text x="252" y="91" class="ui" font-size="14" fill="#f3f3f3">›</text>
+  <text x="68" y="127" class="ui" font-size="14" fill="#f3f3f3">Pause</text>
+  <text x="44" y="163" class="ui" font-size="14" fill="#f3f3f3">✓</text>
+  <text x="68" y="163" class="ui" font-size="14" fill="#f3f3f3">Start with Windows</text>
+  <rect x="32" y="180" width="234" height="1" fill="#454545"/>
+  <text x="68" y="208" class="ui" font-size="14" fill="#f3f3f3">Exit</text>
+
+  <!-- Submenu -->
+  <rect x="270" y="64" width="250" height="198" rx="10" fill="#2b2b2b" stroke="#3f3f3f"/>
+  <rect class="hl" x="276" y="72" width="238" height="32" rx="6" fill="#3d3d3d"/>
+  <text class="chk ui" x="290" y="93" font-size="14" fill="#f3f3f3">✓</text>
+  <text x="314" y="93" class="ui" font-size="14" fill="#f3f3f3">Google Gemini</text>
+  <text x="314" y="129" class="ui" font-size="14" fill="#f3f3f3">ChatGPT</text>
+  <text x="314" y="165" class="ui" font-size="14" fill="#f3f3f3">Claude</text>
+  <rect x="278" y="182" width="234" height="1" fill="#454545"/>
+  <text x="314" y="208" class="ui" font-size="14" fill="#f3f3f3">Rescan installed apps</text>
+  <text x="314" y="244" class="ui" font-size="14" fill="#f3f3f3">How to add an assistant…</text>
+
+  <!-- Tray icon -->
+  <rect x="24" y="236" width="230" height="22" rx="6" fill="#1c1c1c"/>
+  <g fill="none" stroke="#fff" stroke-width="1.2"><ellipse cx="206" cy="250" rx="5.5" ry="4.8"/><path d="M206 245.5 V254.5"/></g>
+  <path d="M213.5 239 C213.8 241 214.2 241.4 216 241.7 C214.2 242 213.8 242.4 213.5 244.4 C213.2 242.4 212.8 242 211 241.7 C212.8 241.4 213.2 241 213.5 239 Z" fill="#fff"/>
+  <path d="M208 234 v-4" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <g class="ui" font-size="13" fill="#94a3b8">
+    <text x="538" y="93">Any web app</text>
+    <text x="538" y="111">you installed</text>
+    <text x="538" y="129">shows up here</text>
+  </g>
+</svg>
