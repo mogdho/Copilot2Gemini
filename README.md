@@ -5,6 +5,8 @@
 
 **Make your keyboard's Copilot key open Google Gemini instead** (or ChatGPT, Claude, or any other web app). One key to open, hide and bring back your assistant, just like a real built-in one.
 
+**⬇️ Download and setup guide: [mogdhopaul.com/copilot2gemini](https://mogdhopaul.com/copilot2gemini/)**
+
 <p align="center">
   <img src="assets/demo.svg" width="100%" alt="Animation: press the Copilot key to open Gemini, press again to hide it, press again to bring it back">
 </p>
